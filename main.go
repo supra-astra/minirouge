@@ -1,10 +1,13 @@
 package main
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"embed"
+	"image"
 
-import "embed"
-import "image"
-import _ "image/png"
+	"github.com/hajimehoshi/ebiten/v2"
+
+	_ "image/png"
+)
 
 //go:embed assets/*
 var assets embed.FS
@@ -31,17 +34,24 @@ func mustLoadImage(name string) *ebiten.Image {
 
 type Game struct{}
 
-// update logic for the game
+func NewGame() *Game {
+	g := &Game{}
+	return g
+}
+
+// update logic will called for each tic.
 func (g *Game) Update() error {
 	return nil
 }
 
+// draw method will be called each draw cycle and
+// is where we will split
 func (g *Game) Draw(screen *ebiten.Image) {
 	//draw the image
 	screen.DrawImage(PlayerSprite, nil)
 }
 
-// render the basic ui
+// layout will return the screen dimensions.
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return outsideWidth, outsideHeight
 }

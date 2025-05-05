@@ -1,4 +1,4 @@
-module first-game
+module minirouge
 
 go 1.24.1
 
